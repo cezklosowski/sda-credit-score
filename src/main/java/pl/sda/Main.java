@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,6 +17,8 @@ public class Main {
         // 1011.0110011001100110011
         // ale nie miesci sie juz w pamieci przeznaczonej na double
         //TODO: znalezc przyklad
+
+        /*
         BigInteger a = new BigInteger("2000000");
         BigInteger b = BigInteger.valueOf(1);
         BigInteger sum = a.add(b);
@@ -30,7 +34,7 @@ public class Main {
         // np. 1.(1)
         System.out.println(a1.pow(2));
         System.out.println(a1.sqrt(MathContext.DECIMAL64));
-
+        */
 
         // Napisz aplikacje do analizy zdolnosci kredytowej, parametry które powinny zostać wzięte pod uwagę to:
         // * wiek
@@ -57,7 +61,7 @@ public class Main {
         // * raty kredytów które spłaca (wprowadza po przecinku) (loanInstallments)
         // * odpowiada czy było opóźnienie (repaymentDelayed)
         // * wprowadza ile chce pożyczyć (amountOfCredit)
-        // Wprowadzone dane zapisz do klasy Debtor (raty kredytów wprowadzone po przecinku musisz rozbić na pojedyncze elementy, zapisz je tablicy)
+        // Wprowadzone dane zapisz do klasy Debtor (raty kredytów wprowadzone po przecinku musisz rozbić na pojedyncze elementy, zapisz je w tablicy)
         // 2. Stwórz klasę RulesEngine, która będzie przetwarzała podane argumenty, powinna:
         // a mieć pola, które są wypełniane w konstruktorze:
         // * oprocentowanie (np. 0,06)
@@ -66,6 +70,56 @@ public class Main {
         // * w metodzie zaimplementuj wszystkie reguły odrzucania, jeśl żadna z nich nie jest spełniona zwróć true, jeśli którakolwiek jest spełniona zwróć false
         // 3. W main utwórz zmienną zawierającą nowy obiekt typu RulesEngine podając w konstruktorze parametry (np. 0,06 i 3000), przetestuj czy rzeczywiscie podane reguły działają
         // 4. W argumencie wprowadź obiekt Debtor utworzony z wprowadzonych przez klienta danych
+
+        // Input data
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Enter your age: ");
+        int age = scan.nextInt();
+        System.out.println("Enter your income: ");
+        int income = scan.nextInt();
+        System.out.println("Enter all installments you pay (separate the amounts with commas): ");
+        scan.nextLine();
+        String loanInstallmentsString = scan.nextLine();
+        String[] loanInstallmentsStringArray = loanInstallmentsString .split(",");
+        int[] loanInstallments = new int[loanInstallmentsStringArray.length];
+
+        for (int i = 0; i < loanInstallments.length; i++) {
+            loanInstallments[i] = Integer.parseInt(loanInstallmentsStringArray[i]);
+        }
+
+        System.out.println("Any delays in paying the installments? y/n ");
+        String repaymentDelayedString = scan.nextLine();
+        boolean repaymentDelayed = true;
+        if (repaymentDelayedString.equalsIgnoreCase("n")){
+            repaymentDelayed = false;
+        }
+        System.out.println("Enter amount of credit: ");
+        int amountOfCredit = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Enter loan repayment period (years): ");
+        int periodInYears = scan.nextInt();
+        scan.nextLine();
+
+        Debtor debtor = new Debtor(age,income,loanInstallments,repaymentDelayed,amountOfCredit,periodInYears);
+
+        BigDecimal interestRate = new BigDecimal(0.06);
+        BigDecimal commision = new BigDecimal(3000);
+        RulesEngine rulesEngine = new RulesEngine(interestRate,commision);
+
+        if(rulesEngine.isCreditApproved(debtor)){
+            System.out.println("Congratulations. You have creditworthiness!");
+        } else {
+            System.out.println("Unfortunately you do not have creditworthiness.");
+        }
+
+
+
+
+
+
+
     }
 }
 
