@@ -105,20 +105,15 @@ public class Main {
         Debtor debtor = new Debtor(age,income,loanInstallments,repaymentDelayed,amountOfCredit,periodInYears);
 
         BigDecimal interestRate = new BigDecimal(0.06);
-        BigDecimal commision = new BigDecimal(3000);
-        RulesEngine rulesEngine = new RulesEngine(interestRate,commision);
+        BigDecimal commission = new BigDecimal(3000);
+        RulesEngine rulesEngine = new RulesEngine(interestRate,commission);
 
+        System.out.println();
         if(rulesEngine.isCreditApproved(debtor)){
-            System.out.println("Congratulations. You have creditworthiness!");
+            System.out.println("Congratulations! You have creditworthiness.");
         } else {
             System.out.println("Unfortunately you do not have creditworthiness.");
         }
-
-
-
-
-
-
 
     }
 }

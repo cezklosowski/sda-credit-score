@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 public class RulesEngine {
     private BigDecimal interestRate;;
-    private BigDecimal commision;
+    private BigDecimal commission;
 
-    public RulesEngine(BigDecimal interestRate, BigDecimal commision) {
+    public RulesEngine(BigDecimal interestRate, BigDecimal commission) {
         this.interestRate = interestRate;
-        this.commision = commision;
+        this.commission = commission;
     }
 
     boolean isCreditApproved(Debtor debtor){
@@ -20,7 +20,7 @@ public class RulesEngine {
             loanInstallmentsSum += debtor.getLoanInstallments()[i];
         }
         BigDecimal amountOfCreditBigDecimal = new BigDecimal(debtor.getAmountOfCredit());
-        BigDecimal costOfCredit = new BigDecimal(String.valueOf(amountOfCreditBigDecimal.multiply(interestRate).add(commision)));
+        BigDecimal costOfCredit = new BigDecimal(String.valueOf(amountOfCreditBigDecimal.multiply(interestRate).add(commission)));
         BigDecimal installment = new BigDecimal(String.valueOf(amountOfCreditBigDecimal.add(costOfCredit).divide(new BigDecimal(debtor.getPeriodInYears()*12))));
         if(installment.add(new BigDecimal(loanInstallmentsSum)).compareTo(new BigDecimal(0.8*debtor.getIncome())) != -1) return false;
         // c opóźnienie w spłacie == tak odrzuć
