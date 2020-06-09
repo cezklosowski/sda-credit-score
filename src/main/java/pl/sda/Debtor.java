@@ -1,14 +1,16 @@
 package pl.sda;
 
+import java.math.BigDecimal;
+
 public class Debtor {
     private int age;
     private int income;
-    private int[] loanInstallments;
+    private BigDecimal[] loanInstallments;
     private boolean repaymentDelayed;
     private int amountOfCredit;
     private int periodInYears;
 
-    public Debtor(int age, int income, int[] loanInstallments, boolean repaymentDelayed, int amountOfCredit, int periodInYears) {
+    public Debtor(int age, int income, BigDecimal[] loanInstallments, boolean repaymentDelayed, int amountOfCredit, int periodInYears) {
         this.age = age;
         this.income = income;
         this.loanInstallments = loanInstallments;
@@ -25,7 +27,7 @@ public class Debtor {
         return income;
     }
 
-    public int[] getLoanInstallments() {
+    public BigDecimal[] getLoanInstallments() {
         return loanInstallments;
     }
 

@@ -83,10 +83,10 @@ public class Main {
         scan.nextLine();
         String loanInstallmentsString = scan.nextLine();
         String[] loanInstallmentsStringArray = loanInstallmentsString .split(",");
-        int[] loanInstallments = new int[loanInstallmentsStringArray.length];
+        BigDecimal[] loanInstallments = new BigDecimal[loanInstallmentsStringArray.length];
 
         for (int i = 0; i < loanInstallments.length; i++) {
-            loanInstallments[i] = Integer.parseInt(loanInstallmentsStringArray[i]);
+            loanInstallments[i] = BigDecimal.valueOf(Long.parseLong(loanInstallmentsStringArray[i]));
         }
 
         System.out.println("Any delays in paying the installments? y/n ");
